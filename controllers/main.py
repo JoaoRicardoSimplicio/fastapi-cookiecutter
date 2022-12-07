@@ -1,17 +1,18 @@
-from fastapi import (
-    Depends,
-    FastAPI
-)
+from fastapi import Depends
 
 from configs.app import (
+    app,
     Settings,
     get_settings
 )
-from controllers import health
+from controllers import (
+    health,
+    tasks
+)
 
 
-app = FastAPI(title=get_settings().app_name)
 app.include_router(health.router)
+app.include_router(tasks.router)
 
 
 @app.get("/")
